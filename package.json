@@ -1,0 +1,23 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "hexlet_project_lvl2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyLeviy/frontend-project-lvl2.git"
+  },
+  "author": "Andrey Leviy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyLeviy/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/AndreyLeviy/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^7.1.0"
+  }
+}
