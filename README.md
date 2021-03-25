@@ -12,6 +12,6 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/6212bcc41ec0c9654c83/maintainability)](https://codeclimate.com/github/AndreyLeviy/frontend-project-lvl2/maintainability)
 
-[![Lint](https://github.com/AndreyLeviy/frontend-project-lvl2/.eslintrc.yml/badge.svg)](https://github.com/AndreyLeviy/frontend-project-lvl2/actions)
+![example workflow](https://github.com/AndreyLeviy/frontend-project-lvl2/workflows.eslintrc.yml/badge.svg)
 
-[![JSON_diff](https://asciinema.org/a/401007)](https://asciinema.org/a/401007)
+[![JSON_diff](https://asciinema.org/a/401007.svg)](https://asciinema.org/a/401007)

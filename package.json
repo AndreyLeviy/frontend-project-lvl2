@@ -3,10 +3,17 @@
   "version": "1.0.0",
   "description": "hexlet_project_lvl2",
   "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "type": "module",
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndreyLeviy/frontend-project-lvl2.git"
@@ -18,7 +25,9 @@
   },
   "homepage": "https://github.com/AndreyLeviy/frontend-project-lvl2#readme",
   "dependencies": {
+    "asciicast2gif": "^0.2.1",
     "commander": "^7.1.0",
+    "js-yaml": "^3.14.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

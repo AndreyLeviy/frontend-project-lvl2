@@ -1,7 +1,11 @@
 ---
-
+# Включает поддержку конструкции import.meta.url
+parserOptions:
+  ecmaVersion: 2020
+rules:
+  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }] # разрешает подчёркивание в именах только для двух констант
 plugins:
-  # https://github.com/jest-community/eslint-plugin-jest
+# https://github.com/jest-community/eslint-plugin-jest
   - jest
 
 # https://eslint.org/docs/user-guide/configuring#specifying-environments

@@ -11,7 +11,7 @@ const jsonWithoutQuotes = (objFromJson) => {
   return `{\n${changeToStr}\n}`;
 };
 
-const genDiff = (pathToFile1, pathToFile2) => {
+  const genDiff = (pathToFile1, pathToFile2) => {
   const file1 = fs.readFileSync(pathToFile1);
   const file2 = fs.readFileSync(pathToFile2);
   const toJsonFile1 = JSON.parse(file1);
