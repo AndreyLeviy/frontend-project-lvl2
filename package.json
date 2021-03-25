@@ -11,8 +11,6 @@
   },
   "type": "module",
   "jest": {
-    "testEnvironment": "node",
-    "transform": {},
     "verbose": true
   },
   "repository": {
