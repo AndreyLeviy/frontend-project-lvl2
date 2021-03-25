@@ -12,7 +12,8 @@
   "type": "module",
   "jest": {
     "testEnvironment": "node",
-    "transform": {}
+    "transform": {},
+    "testRunner": "jest-circus/runner"
   },
   "repository": {
     "type": "git",
