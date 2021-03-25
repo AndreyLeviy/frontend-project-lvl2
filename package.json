@@ -13,7 +13,9 @@
   "jest": {
     "testEnvironment": "node",
     "transform": {},
-    "testRunner": "jest-circus/runner"
+    "jest": {
+      "verbose": true
+    }
   },
   "repository": {
     "type": "git",
