@@ -3,9 +3,8 @@ name: Node CI
 
 # Trigger the workflow on push or pull request
 on:
-  push:
-    branches:
-      - '**'
+  - push
+  - pull_request
 
 jobs:
   build:
