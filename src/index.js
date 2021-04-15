@@ -1,47 +1,53 @@
-#!/usr/bin/env node
-
+import * as path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
+import parser from './parser.js';
 
-const jsonWithoutQuotes = (objFromJson) => {
-  const changeToStr = Object
-    .keys(objFromJson)
-    .map((key) => `  ${key}: ${objFromJson[key]}`)
-    .join('\n');
-  return `{\n${changeToStr}\n}`;
+const getFileExtension = (filePath) => path.extname(filePath);
+const getDataFile = (filePath) => fs.readFileSync(filePath);
+const getFileKeys = (obj) => Object.keys(obj);
+const getUnionKeys = (arr1, arr2) => _.union(arr1, arr2);
+
+const buildTree = (obj1, obj2) => {
+  const file1Keys = getFileKeys(obj1);
+  const file2Keys = getFileKeys(obj2);
+  const unionKeys = getUnionKeys(file1Keys, file2Keys);
+
+  const treeDiff = _.sortBy(unionKeys)
+    .flatMap((key) => {
+      if (file1Keys.includes(key) && file2Keys.includes(key)) {
+        if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+          const child = buildTree(obj1[key], obj2[key]);
+
+          return { name: key, change: 'object', children: child };
+        } if (obj1[key] === obj2[key]) {
+          return { name: key, change: 'not_changed', value: obj1[key] };
+        }
+        return { name: key, change: 'changed', value1: obj1[key], value2: obj2[key] };
+      } if (file1Keys.includes(key)) {
+        return { name: key, change: 'deleted', value1: obj1[key] };
+      } if (file2Keys.includes(key)) {
+        return { name: key, change: 'added', value2: obj2[key] };
+      }
+    });
+  return treeDiff;
 };
 
-  const genDiff = (pathToFile1, pathToFile2) => {
-  const file1 = fs.readFileSync(pathToFile1);
-  const file2 = fs.readFileSync(pathToFile2);
-  const toJsonFile1 = JSON.parse(file1);
-  const toJsonFile2 = JSON.parse(file2);
+const genDiff = (filePath1, filePath2, format) => {
+  const fileExtension1 = getFileExtension(filePath1);
+  const fileExtension2 = getFileExtension(filePath2);
 
-  const file1Keys = Object.keys(toJsonFile1);
-  const file2Keys = Object.keys(toJsonFile2);
-  const unionKeys = _.union(file1Keys, file2Keys);
+  if (fileExtension1 !== fileExtension2) {
+    console.log(new Error('FILES HAVE DIFFERENT EXTENSIONS!!!'));
+  }
 
-  const cb = (acc, key) => {
-    if (file1Keys.includes(key) && file2Keys.includes(key)) {
-      if (toJsonFile1[key] === toJsonFile2[key]) {
-        acc[`  ${key}`] = toJsonFile1[key];
-      } else {
-        const plus = `+ ${key}`;
-        const minus = `- ${key}`;
-        acc[minus] = toJsonFile1[key];
-        acc[plus] = toJsonFile2[key];
-      }
-    } else if (file1Keys.includes(key)) {
-      acc[`- ${key}`] = toJsonFile1[key];
-    } else {
-      acc[`+ ${key}`] = toJsonFile2[key];
-    }
-    return acc;
-  };
+  const dataFile1 = getDataFile(filePath1);
+  const dataFile2 = getDataFile(filePath2);
 
-  const differenceJson = _.sortBy(unionKeys).reduce(cb, {});
+  const parsedFile1 = parser(dataFile1, fileExtension1);
+  const parsedFile2 = parser(dataFile2, fileExtension2);
 
-  return jsonWithoutQuotes(differenceJson);
+  return format(buildTree(parsedFile1, parsedFile2));
 };
 
 export default genDiff;
