@@ -1,7 +1,7 @@
 install:
 	npm install
-gendiff filePath1 filePath2:
-	node bin/gendiff.js filePath1 filePath2
+gendiff:
+	node bin/gendiff.js <filepath1> <filepath2>
 link:
 	npm link
 publish:
