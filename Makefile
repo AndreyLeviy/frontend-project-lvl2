@@ -5,9 +5,11 @@ gendiff:
 link:
 	npm link
 publish:
-	npm publish --dry-runlint
+	npm publish --dry-run
 lint:
-	npx eslint .
+	npx eslint
+jest:
+	NODE_OPTIONS=--experimental-vm-modules npx jest
 test:
 	npm test
 test-coverage:
