@@ -7,6 +7,7 @@ const parser = (dataFile, fileExtension) => {
   if (fileExtension === '.yaml') {
     return yaml.load(dataFile);
   }
+  return 'not supported format';
 };
 
 export default parser;

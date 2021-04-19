@@ -30,6 +30,7 @@ const buildTree = (obj1, obj2) => {
       } if (file2Keys.includes(key)) {
         return { name: key, change: 'added', value2: obj2[key] };
       }
+      return {};
     });
   return treeDiff;
 };

@@ -33,6 +33,7 @@ const stylish = (arg, depth = 1) => {
       if (val.change === 'not_changed') {
         return `${indent}${mark}${val.name}: ${val.value}`;
       }
+      return '';
     })
       .join('\n');
     return `{\n${str}\n${indent}}`;

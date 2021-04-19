@@ -25,6 +25,7 @@ const plain = (arg, path = []) => {
     if (val.change === 'deleted') {
       return [`Property '${[...path, val.name].join('.')}' was removed`];
     }
+    return [];
   };
   const result = arg.flatMap((val) => func(val)).join('\n');
   return result;
