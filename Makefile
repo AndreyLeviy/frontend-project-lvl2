@@ -1,13 +1,13 @@
 install:
-    npm install
-gendiff:
-    node bin/gendiff.js <filepath1> <filepath2>
+	npm install
+gendiff filePath1 filePath2:
+	node bin/gendiff.js filePath1 filePath2
+link:
+	npm link
 publish:
 	npm publish --dry-runlint
 lint:
-    npx eslint
-jest:
-    NODE_OPTIONS=--experimental-vm-modules npx jest
+	npx eslint .
 test:
 	npm test
 test-coverage:

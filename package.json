@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "description": "hexlet_project_lvl2",
   "bin": {
-    "gendiff": "bin/gendiff.js", 
-    "lint": "npx eslint"
+    "gendiff": "./bin/gendiff.js"
   },
   "main": "index.js",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "lint": "eslintrc",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "lint": "npx eslint",
+    "test": "npx jest"
   },
   "type": "module",
   "jest": {
