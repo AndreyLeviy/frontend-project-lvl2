@@ -2,9 +2,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import * as path from 'path';
 import fs from 'fs';
-import stylish from '../formatters/stylish.js';
-import plain from '../formatters/plain.js';
-import json from '../formatters/json.js';
 import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,37 +16,37 @@ test('genDiffTest Stylish JSON', () => {
   const filePath1 = getFixturePath('file1.json');
   const filePath2 = getFixturePath('file2.json');
 
-  expect(genDiff(filePath1, filePath2, stylish)).toEqual(referenceStylish);
+  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(referenceStylish);
 });
 test('genDiffTest Stylish YAML', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
 
-  expect(genDiff(filePath1, filePath2, stylish)).toEqual(referenceStylish);
+  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(referenceStylish);
 });
 test('genDiffTest Plain JSON', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
 
-  expect(genDiff(filePath1, filePath2, plain)).toEqual(referencePlain);
+  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(referencePlain);
 });
 
 test('genDiffTest Plain YAML', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
 
-  expect(genDiff(filePath1, filePath2, plain)).toEqual(referencePlain);
+  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(referencePlain);
 });
 
 test('genDiffTest json JSON', () => {
   const filePath1 = getFixturePath('file1.json');
   const filePath2 = getFixturePath('file2.json');
 
-  expect(genDiff(filePath1, filePath2, json)).toEqual(referenceJson);
+  expect(genDiff(filePath1, filePath2, 'json')).toEqual(referenceJson);
 });
 test('genDiffTest json YAML', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
 
-  expect(genDiff(filePath1, filePath2, json)).toEqual(referenceJson);
+  expect(genDiff(filePath1, filePath2, 'json')).toEqual(referenceJson);
 });

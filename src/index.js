@@ -2,6 +2,7 @@ import * as path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import parser from './parser.js';
+import getFormatter from '../formatters/index.js';
 
 const getFileExtension = (filePath) => path.extname(filePath);
 const getDataFile = (filePath) => fs.readFileSync(filePath);
@@ -49,7 +50,8 @@ const genDiff = (filePath1, filePath2, format) => {
   const parsedFile1 = parser(dataFile1, fileExtension1);
   const parsedFile2 = parser(dataFile2, fileExtension2);
 
-  return format(buildTree(parsedFile1, parsedFile2));
+  const formatDiff = getFormatter(format);
+  return formatDiff(buildTree(parsedFile1, parsedFile2));
 };
 
 export default genDiff;

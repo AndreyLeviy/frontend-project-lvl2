@@ -1,16 +1,15 @@
-import genDiff from '../src/index.js';
 import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-const formattedDif = (filePath1, filePath2, formatter) => {
+const getFormatter = (formatter) => {
   if (formatter === 'plain') {
-    return genDiff(filePath1, filePath2, plain);
+    return plain;
   }
   if (formatter === 'json') {
-    return genDiff(filePath1, filePath2, json);
+    return json;
   }
-  return genDiff(filePath1, filePath2, stylish);
+  return stylish;
 };
 
-export default formattedDif;
+export default getFormatter;
