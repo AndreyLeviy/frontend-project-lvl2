@@ -22,9 +22,7 @@ const buildTree = (obj1, obj2) => {
         } if (obj1[key] === obj2[key]) {
           return { name: key, change: 'not_changed', value: obj1[key] };
         }
-        return {
-          name: key, change: 'changed', value1: obj1[key], value2: obj2[key],
-        };
+        return { name: key, change: 'changed', value1: obj1[key], value2: obj2[key] };
       } if (file1Keys.includes(key)) {
         return { name: key, change: 'deleted', value1: obj1[key] };
       } if (file2Keys.includes(key)) {
