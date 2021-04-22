@@ -11,6 +11,7 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 const referenceStylish = readFile('fileToEqualStylish.txt');
 const referencePlain = readFile('fileToEqualPlain.txt');
 const referenceJson = readFile('fileToEqualJson.txt');
+const referenceStylish1 = readFile('fileToEqualStylish1.txt');
 
 test('genDiffTest Stylish JSON', () => {
   const filePath1 = getFixturePath('file1.json');
@@ -51,30 +52,9 @@ test('genDiffTest json YAML', () => {
   expect(genDiff(filePath1, filePath2, 'json')).toEqual(referenceJson);
 });
 
-const stylishHexlet = readFile('result_stylish.txt');
-const plainHexlet = readFile('result_plain.txt');
-test('HexletCheckFixtures Stylish JSON', () => {
-  const filePath1 = getFixturePath('file1Hexlet.json');
-  const filePath2 = getFixturePath('file2Hexlet.json');
+test('genDiffTest1 Stylish JSON', () => {
+  const filePath3 = getFixturePath('file3.json');
+  const filePath4 = getFixturePath('file4.json');
 
-  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(stylishHexlet);
-});
-test('HexletCheckFixtures Stylish YAML', () => {
-  const filePath1 = getFixturePath('file1Hexlet.yml');
-  const filePath2 = getFixturePath('file2Hexlet.yml');
-
-  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(stylishHexlet);
-});
-
-test('HexletCheckFixtures Plain JSON', () => {
-  const filePath1 = getFixturePath('file1Hexlet.json');
-  const filePath2 = getFixturePath('file2Hexlet.json');
-
-  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(plainHexlet);
-});
-test('HexletCheckFixtures Plain YAML', () => {
-  const filePath1 = getFixturePath('file1Hexlet.yml');
-  const filePath2 = getFixturePath('file2Hexlet.yml');
-
-  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(plainHexlet);
+  expect(genDiff(filePath3, filePath4, 'stylish')).toEqual(referenceStylish1);
 });
