@@ -16,40 +16,40 @@ const referenceStylish1 = readFile('fileToEqualStylish1.txt');
 test('genDiffTest Stylish JSON', () => {
   const filePath1 = getFixturePath('file1.json');
   const filePath2 = getFixturePath('file2.json');
-
-  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(referenceStylish);
+  const result = `${genDiff(filePath1, filePath2, 'stylish')}\n`;
+  expect(result).toEqual(referenceStylish);
 });
 test('genDiffTest Stylish YAML', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
-
-  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(referenceStylish);
+  const result = `${genDiff(filePath1, filePath2, 'stylish')}\n`;
+  expect(result).toEqual(referenceStylish);
 });
 test('genDiffTest Plain JSON', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
-
-  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(referencePlain);
+  const result = `${genDiff(filePath1, filePath2, 'plain')}\n`;
+  expect(result).toEqual(referencePlain);
 });
 
 test('genDiffTest Plain YAML', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
-
-  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(referencePlain);
+  const result = `${genDiff(filePath1, filePath2, 'plain')}\n`;
+  expect(result).toEqual(referencePlain);
 });
 
 test('genDiffTest json JSON', () => {
   const filePath1 = getFixturePath('file1.json');
   const filePath2 = getFixturePath('file2.json');
-
-  expect(genDiff(filePath1, filePath2, 'json')).toEqual(referenceJson);
+  const result = `${genDiff(filePath1, filePath2, 'json')}\n`;
+  expect(result).toEqual(referenceJson);
 });
 test('genDiffTest json YAML', () => {
   const filePath1 = getFixturePath('file1.yaml');
   const filePath2 = getFixturePath('file2.yaml');
-
-  expect(genDiff(filePath1, filePath2, 'json')).toEqual(referenceJson);
+  const result = `${genDiff(filePath1, filePath2, 'json')}\n`;
+  expect(result).toEqual(referenceJson);
 });
 
 test('genDiffTest1 Stylish JSON', () => {
