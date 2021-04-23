@@ -52,9 +52,9 @@ test('genDiffTest json YAML', () => {
   expect(result).toEqual(referenceJson);
 });
 
-test('genDiffTest1 Stylish JSON', () => {
-  const filePath3 = getFixturePath('file3.json');
-  const filePath4 = getFixturePath('file4.json');
+test('genDiffTest1 Stylish YML', () => {
+  const filePath3 = getFixturePath('file3.yml');
+  const filePath4 = getFixturePath('file4.yml');
   const result = `${genDiff(filePath3, filePath4, 'stylish')}\n`;
   expect(result).toEqual(referenceStylish1);
 });

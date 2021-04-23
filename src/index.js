@@ -51,7 +51,8 @@ const genDiff = (filePath1, filePath2, format) => {
   const parsedFile2 = parser(dataFile2, fileExtension2);
 
   const formatDiff = getFormatter(format);
-  return formatDiff(buildTree(parsedFile1, parsedFile2));
+  const tree = buildTree(parsedFile1, parsedFile2);
+  return formatDiff(tree);
 };
 
 export default genDiff;
