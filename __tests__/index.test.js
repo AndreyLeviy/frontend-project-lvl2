@@ -8,51 +8,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(`${__dirname}`, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
-const referenceStylish = readFile('fileToEqualStylish.txt');
-const referencePlain = readFile('fileToEqualPlain.txt');
-const referenceJson = readFile('fileToEqualJson.txt');
+const comparisonResultStylish = readFile('fileToEqualStylish.txt');
+const сomparisonResultPlain = readFile('fileToEqualPlain.txt');
+const сomparisonResultJson = readFile('fileToEqualJson.txt');
 
-test('genDiffTest Stylish JSON', () => {
-  const filePath1 = getFixturePath('file1.json');
-  const filePath2 = getFixturePath('file2.json');
-  const result = `${genDiff(filePath1, filePath2, 'stylish')}\n`;
-  expect(result).toEqual(referenceStylish);
-});
-test('genDiffTest Stylish YAML', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const result = `${genDiff(filePath1, filePath2, 'stylish')}\n`;
-  expect(result).toEqual(referenceStylish);
-});
-test('genDiffTest1 Stylish YML', () => {
-  const filePath3 = getFixturePath('file1.yml');
-  const filePath4 = getFixturePath('file2.yml');
-  const result = `${genDiff(filePath3, filePath4, 'stylish')}\n`;
-  expect(result).toEqual(referenceStylish);
-});
-test('genDiffTest Plain JSON', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const result = `${genDiff(filePath1, filePath2, 'plain')}\n`;
-  expect(result).toEqual(referencePlain);
-});
+const extensions = ['json', 'yaml', 'yml'];
+const comparisonResult = {
+  stylish: comparisonResultStylish,
+  plain: сomparisonResultPlain,
+  json: сomparisonResultJson,
+};
 
-test('genDiffTest Plain YAML', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const result = `${genDiff(filePath1, filePath2, 'plain')}\n`;
-  expect(result).toEqual(referencePlain);
-});
-
-test('genDiffTest json JSON', () => {
-  const filePath1 = getFixturePath('file1.json');
-  const filePath2 = getFixturePath('file2.json');
-  const result = `${genDiff(filePath1, filePath2, 'json')}\n`;
-  expect(result).toEqual(referenceJson);
-});
-test('genDiffTest json YAML', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const result = `${genDiff(filePath1, filePath2, 'json')}\n`;
-  expect(result).toEqual(referenceJson);
+describe.each(extensions)('extension %s', (extension) => {
+  test.each(['stylish', 'plain', 'json'])('format %s', (format) => {
+    const filePath1 = getFixturePath(`file1.${extension}`);
+    const filePath2 = getFixturePath(`file2.${extension}`);
+    const result = genDiff(filePath1, filePath2, format);
+    expect(result).toEqual(comparisonResult[format].trim());
+  });
 });
