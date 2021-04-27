@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "npx eslint",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "npx jest"
   },
   "type": "module",
   "jest": {
@@ -30,7 +30,6 @@
   },
   "homepage": "https://github.com/AndreyLeviy/frontend-project-lvl2#readme",
   "dependencies": {
-    "asciicast2gif": "^0.2.1",
     "commander": "^7.1.0",
     "js-yaml": "^3.14.1",
     "lodash": "^4.17.21"
