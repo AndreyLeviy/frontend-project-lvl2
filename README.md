@@ -27,3 +27,22 @@
 [![PLAIN_formatt](https://asciinema.org/a/408262.svg)](https://asciinema.org/a/408262)
 ### <b>JSON</b>
 [![JSON_formatt](https://asciinema.org/a/408265.svg)](https://asciinema.org/a/408265)
+
+## Установка:
+
+<p>Проект работает с node 14.0.0 и выше</p>
+
+<p>
+Для установки пакета необходимо скопировать репозиторий себе на устройство:
+
+```bash
+git clone https://github.com/AndreyLeviy/frontend-project-lvl2.git
+```
+Далее необходимо перейти в корневую папку проекта и последовательно выполнить следующие команды:
+
+```bash
+make instal
+make link
+```
+После выполнения команд, пакет готов к работе.
+</p>
