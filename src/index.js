@@ -5,12 +5,12 @@ import getFormatter from './formatters/index.js';
 import buildTree from './buildTree.js';
 
 const getFileExtension = (filePath) => path.extname(filePath);
-const getDataFile = (filePath) => fs.readFileSync(filePath);
+const getFileData = (filePath) => fs.readFileSync(filePath);
 
 const parseFile = (filePath) => {
   const fileExtension = getFileExtension(filePath);
-  const dataFile = getDataFile(filePath);
-  return parser(dataFile, fileExtension);
+  const fileData = getFileData(filePath);
+  return parser(fileData, fileExtension);
 };
 
 const genDiff = (filePath1, filePath2, format) => {
