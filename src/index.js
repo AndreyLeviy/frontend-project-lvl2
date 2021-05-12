@@ -1,23 +1,23 @@
 import * as path from 'path';
 import fs from 'fs';
-import parser from './parser.js';
+import parse from './parser.js';
 import getFormatter from './formatters/index.js';
 import buildTree from './buildTree.js';
 
 const getFileExtension = (filePath) => path.extname(filePath);
 const getFileData = (filePath) => fs.readFileSync(filePath);
 
-const getParsedFile = (filePath) => {
+const getParsedData = (filePath) => {
   const fileExtension = getFileExtension(filePath);
   const fileData = getFileData(filePath);
-  return parser(fileData, fileExtension);
+  return parse(fileData, fileExtension);
 };
 
 const genDiff = (filePath1, filePath2, format) => {
-  const parsedFile1 = getParsedFile(filePath1);
-  const parsedFile2 = getParsedFile(filePath2);
+  const parsedData1 = getParsedData(filePath1);
+  const parsedData2 = getParsedData(filePath2);
   const formatDiff = getFormatter(format);
-  const tree = buildTree(parsedFile1, parsedFile2);
+  const tree = buildTree(parsedData1, parsedData2);
   return formatDiff(tree);
 };
 
