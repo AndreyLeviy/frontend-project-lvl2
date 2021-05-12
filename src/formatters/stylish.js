@@ -14,21 +14,19 @@ const stylish = (arg, depth = 1) => {
       const markPlus = '  + ';
       const markMinus = '  - ';
 
-      const strMark = `${indent}${mark}${val.name}: ${stylish(val.children, depth + 1)}`;
-      const strMarkPlus = `${indent}${markPlus}${val.name}: ${stylish(val.value2, depth + 1)}`;
-      const strMarkMinus = `${indent}${markMinus}${val.name}: ${stylish(val.value1, depth + 1)}`;
+      const string = (marker, value) => `${indent}${marker}${val.name}: ${stylish(value, depth + 1)}`;
 
       if (val.change === 'object') {
-        return strMark;
+        return string(mark, val.children);
       }
       if (val.change === 'added') {
-        return strMarkPlus;
+        return string(markPlus, val.value2);
       }
       if (val.change === 'deleted') {
-        return strMarkMinus;
+        return string(markMinus, val.value1);
       }
       if (val.change === 'changed') {
-        return `${strMarkMinus}\n${strMarkPlus}`;
+        return `${string(markMinus, val.value1)}\n${string(markPlus, val.value2)}`;
       }
       if (val.change === 'not_changed') {
         return `${indent}${mark}${val.name}: ${val.value}`;
