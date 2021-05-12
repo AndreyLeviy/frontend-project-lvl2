@@ -1,8 +1,10 @@
+import _ from 'lodash';
+
 const stylish = (arg, depth = 1) => {
   const tab = '    ';
   const indent = tab.repeat(depth - 1);
 
-  if (typeof arg === 'object' && arg !== null && Array.isArray(arg) !== true) {
+  if (_.isPlainObject(arg)) {
     const keys = Object.keys(arg);
     const str = keys.map((key) => `${tab.repeat(depth)}${key}: ${stylish(arg[key], depth + 1)}`)
       .join('\n');
