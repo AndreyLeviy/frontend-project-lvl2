@@ -1,5 +1,5 @@
 const stylish = (arg, depth = 1) => {
-  const tab = ' '.repeat(4);
+  const tab = '    ';
   const indent = tab.repeat(depth - 1);
 
   if (typeof arg === 'object' && arg !== null && Array.isArray(arg) !== true) {
