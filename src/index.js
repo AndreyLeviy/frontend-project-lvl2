@@ -1,7 +1,7 @@
 import * as path from 'path';
 import fs from 'fs';
 import parse from './parser.js';
-import getFormatter from './formatters/index.js';
+import getFormat from './formatters/index.js';
 import buildTree from './buildTree.js';
 
 const getFileExtension = (filePath) => path.extname(filePath);
@@ -16,7 +16,7 @@ const getParsedData = (filePath) => {
 const genDiff = (filePath1, filePath2, format) => {
   const parsedData1 = getParsedData(filePath1);
   const parsedData2 = getParsedData(filePath2);
-  const formatDiff = getFormatter(format);
+  const formatDiff = getFormat(format);
   const tree = buildTree(parsedData1, parsedData2);
   return formatDiff(tree);
 };
