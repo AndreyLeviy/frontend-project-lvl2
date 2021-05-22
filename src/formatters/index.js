@@ -2,7 +2,7 @@ import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-const getFormat = (format) => {
+const getFormatter = (format) => {
   if (format === 'plain') {
     return plain;
   }
@@ -12,4 +12,4 @@ const getFormat = (format) => {
   return stylish;
 };
 
-export default getFormat;
+export default getFormatter;
