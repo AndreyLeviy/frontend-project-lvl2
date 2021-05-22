@@ -10,23 +10,22 @@ const stringify = (val) => {
 
 const plain = (arg, path = []) => {
   const func = (val) => {
-    if (val.change === 'object') {
-      return plain(val.children, [...path, val.name]);
+    switch (val.change) {
+      case 'object':
+        return plain(val.children, [...path, val.name]);
+      case 'added':
+        return [`Property '${[...path, val.name].join('.')}' was added with value: ${stringify(val.value2)}`];
+      case 'not_changed': 
+        return [];
+      case 'changed':
+        return [`Property '${[...path, val.name].join('.')}' was updated. From ${stringify(val.value1)} to ${stringify(val.value2)}`];
+      case 'deleted':
+        return [`Property '${[...path, val.name].join('.')}' was removed`];
+      default:
+        return [];
     }
-    if (val.change === 'added') {
-      return [`Property '${[...path, val.name].join('.')}' was added with value: ${stringify(val.value2)}`];
-    }
-    if (val.change === 'not_changed') {
-      return [];
-    }
-    if (val.change === 'changed') {
-      return [`Property '${[...path, val.name].join('.')}' was updated. From ${stringify(val.value1)} to ${stringify(val.value2)}`];
-    }
-    if (val.change === 'deleted') {
-      return [`Property '${[...path, val.name].join('.')}' was removed`];
-    }
-    return [];
   };
+
   const result = arg.flatMap((val) => func(val)).join('\n');
   return result;
 };
