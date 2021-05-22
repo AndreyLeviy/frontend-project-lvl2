@@ -1,44 +1,50 @@
 import _ from 'lodash';
 
-const stylish = (arg, depth = 1) => {
-  const tab = '    ';
-  const indent = tab.repeat(depth - 1);
+const toString = (value, depth) => {
+  const iter = (subvalue, subdepth = 1) => {
+    const tab = '    ';
+    const indent = tab.repeat(subdepth - 1);
+    if (_.isObject(subvalue)) {
+      const keys = Object.keys(subvalue);
+      const str = keys.map((key) => `${tab.repeat(subdepth)}${key}: ${iter(subvalue[key], subdepth + 1)}`)
+        .join('\n');
+      return `{\n${str}\n${indent}}`;
+    }
+    return `${subvalue}`;
+  };
+  return iter(value, depth);
+};
 
-  if (_.isPlainObject(arg)) {
-    const keys = Object.keys(arg);
-    const str = keys.map((key) => `${tab.repeat(depth)}${key}: ${stylish(arg[key], depth + 1)}`)
-      .join('\n');
-    return `{\n${str}\n${indent}}`;
-  }
-  if (Array.isArray(arg) === true) {
-    const str = arg.map((val) => {
+const stylish = (tree) => {
+  const iter = (subtree, subdepth = 1) => {
+    const tab = '    ';
+    const indent = tab.repeat(subdepth - 1);
+    if (!Array.isArray(subtree)) throw new Error('');
+    const str = subtree.map((val) => {
       const mark = '    ';
       const markPlus = '  + ';
       const markMinus = '  - ';
 
-      const string = (marker, value) => `${indent}${marker}${val.name}: ${stylish(value, depth + 1)}`;
-
-      if (val.change === 'object') {
-        return string(mark, val.children);
+      const string = (marker, value, stringify) => `${indent}${marker}${val.name}: ${stringify(value, subdepth + 1)}`;
+      switch (val.change) {
+        case 'object':
+          return string(mark, val.children, iter);
+        case 'added':
+          return string(markPlus, val.value2, toString);
+        case 'deleted':
+          return string(markMinus, val.value1, toString);
+        case 'changed':
+          return `${string(markMinus, val.value1, toString)}\n${string(markPlus, val.value2, toString)}`;
+        case 'not_changed':
+          return string(mark, val.value, toString);
+        default:
+          return '';
       }
-      if (val.change === 'added') {
-        return string(markPlus, val.value2);
-      }
-      if (val.change === 'deleted') {
-        return string(markMinus, val.value1);
-      }
-      if (val.change === 'changed') {
-        return `${string(markMinus, val.value1)}\n${string(markPlus, val.value2)}`;
-      }
-      if (val.change === 'not_changed') {
-        return `${indent}${mark}${val.name}: ${val.value}`;
-      }
-      return '';
     })
       .join('\n');
     return `{\n${str}\n${indent}}`;
-  }
-  return `${arg}`;
+  };
+  return iter(tree);
 };
 
 export default stylish;
