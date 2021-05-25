@@ -1,14 +1,13 @@
 import yaml from 'js-yaml';
+import _ from 'lodash';
 
-const getParse = (format) => {
-  if (format === 'json') {
-    return JSON.parse;
-  }
-  if (format === 'yml' || format === 'yaml') {
-    return yaml.load;
+const getParser = (format) => {
+  const formatAndParser = { json: JSON.parse, yml: yaml.load, yaml: yaml.load };
+  if (_.has(formatAndParser, format)) {
+    return formatAndParser[format];
   }
   throw new Error('not supported format');
 };
 
-const parse = (data, format) => getParse(format)(data);
+const parse = (data, format) => getParser(format)(data);
 export default parse;
