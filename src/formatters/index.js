@@ -3,13 +3,8 @@ import plain from './plain.js';
 import json from './json.js';
 
 const getFormatter = (format) => {
-  if (format === 'plain') {
-    return plain;
-  }
-  if (format === 'json') {
-    return json;
-  }
-  return stylish;
+  const formats = { plain, json, stylish };
+  return formats[format];
 };
 
 export default getFormatter;

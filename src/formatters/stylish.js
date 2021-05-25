@@ -5,7 +5,7 @@ const toString = (value, depth) => {
     const tab = '    ';
     const indent = tab.repeat(subdepth - 1);
     if (_.isObject(subvalue)) {
-      const keys = Object.keys(subvalue);
+      const keys = _.keys(subvalue);
       const str = keys.map((key) => `${tab.repeat(subdepth)}${key}: ${iter(subvalue[key], subdepth + 1)}`)
         .join('\n');
       return `{\n${str}\n${indent}}`;
@@ -19,7 +19,7 @@ const stylish = (tree) => {
   const iter = (subtree, subdepth = 1) => {
     const tab = '    ';
     const indent = tab.repeat(subdepth - 1);
-    if (!Array.isArray(subtree)) throw new Error('');
+    if (!_.isArray(subtree)) throw new Error('Wrong tree format. Tree is an array');
     const str = subtree.map((val) => {
       const mark = '    ';
       const markPlus = '  + ';
