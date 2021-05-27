@@ -1,8 +1,9 @@
 import yaml from 'js-yaml';
 import _ from 'lodash';
 
+const formatAndParser = { json: JSON.parse, yml: yaml.load, yaml: yaml.load };
+
 const getParser = (format) => {
-  const formatAndParser = { json: JSON.parse, yml: yaml.load, yaml: yaml.load };
   if (_.has(formatAndParser, format)) {
     return formatAndParser[format];
   }

@@ -19,7 +19,7 @@ const stylish = (tree) => {
   const iter = (subtree, subdepth = 1) => {
     const tab = '    ';
     const indent = tab.repeat(subdepth - 1);
-    if (!_.isArray(subtree)) throw new Error('Wrong tree format. Tree is an array');
+    if (!_.isArray(subtree)) throw new Error('Wrong tree format. Tree should be an array');
     const str = subtree.map((val) => {
       const mark = '    ';
       const markPlus = '  + ';
