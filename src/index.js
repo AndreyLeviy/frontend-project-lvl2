@@ -13,7 +13,7 @@ const getParsedData = (filePath) => {
   return parse(fileData, fileExtension);
 };
 
-const genDiff = (filePath1, filePath2, format) => {
+const genDiff = (filePath1, filePath2, format = 'stylish') => {
   const parsedData1 = getParsedData(filePath1);
   const parsedData2 = getParsedData(filePath2);
   const formatDiff = getFormatter(format);
